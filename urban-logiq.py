@@ -6,7 +6,7 @@ csvFolder = os.listdir('CSV/')
 os.chdir('CSV/')
 
 # grabs csv file 
-csvFile = csvFolder[3]
+csvFile = csvFolder[0]
 
 # Reads CSV files
 with open(csvFile, newline='') as f:
@@ -16,9 +16,7 @@ with open(csvFile, newline='') as f:
     siteCode = csv_list[5][1]
     date = csv_list[7][1]
 
-    # csv dictionary
-    # print(csv_list[45][1][:2])
-    # print(csv_list[45][1][3:])
+
 
     # get the start end all vehicle value and start end  heavy value
 
@@ -236,38 +234,8 @@ with open(csvFile, newline='') as f:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
 
 
 
