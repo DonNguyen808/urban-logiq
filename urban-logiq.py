@@ -16,17 +16,10 @@ with open(csvFile, newline='') as f:
     siteCode = csv_list[5][1]
     date = csv_list[7][1]
 
-
-
-    # get the start end all vehicle value and start end  heavy value
-
-    # loop each time period direction and subtract each other
-
     # puts all the formatted data into a list to print onto the csv file
     final_list = []
     indexCount = 0
     
-
     # Finds All Vehicle Volume rows
     for idx, row in enumerate(csv_list):
         if row[0] == 'ALL-VEHICLE VOLUMES':
@@ -45,8 +38,6 @@ with open(csvFile, newline='') as f:
     # Grabs only all vehicle volume data
     for idx, row in enumerate(csv_list) :
         if idx >= allVehicleVolumeStart and idx < allVehicleVolumeEnd:
-
-            # print(idx, row)
 
             # all vehicle volume NB
             time = row[0]
@@ -71,7 +62,6 @@ with open(csvFile, newline='') as f:
             SBU = [date, time, "Cars", "UTurn", "SB", sbu, siteCode]
 
             # all vehicle volume EB
-            # time = row[0]
             ebr = int(row[13]) - int(csv_list[heavyVehicleVolumeStart + indexCount][9])
             ebt = int(row[12]) - int(csv_list[heavyVehicleVolumeStart + indexCount][8])
             ebl = int(row[11]) - int(csv_list[heavyVehicleVolumeStart + indexCount][7])
@@ -92,6 +82,7 @@ with open(csvFile, newline='') as f:
             WBL = [date, time, "Cars", "Left", "WB", wbl, siteCode]
             WBU = [date, time, "Cars", "UTurn", "WB", wbu, siteCode]
 
+            # 
             indexCount += 1
 
             nb = [NBR, NBT, NBL, NBU]
@@ -108,14 +99,9 @@ with open(csvFile, newline='') as f:
             for element in wb:
                 final_list.append(element)
             
-    # print(f'NB Left {allVehicleVolumeNBLeft}')
-
-    print('All Vehicles')
-
     # Grabs only Heavy Vehicle Volume data
     for idx, row in enumerate(csv_list) :
         if idx >= heavyVehicleVolumeStart and idx < heavyVehicleVolumeEnd:
-            # print(idx, x)
 
         # NB Truck count
             time = row[0]
@@ -126,7 +112,7 @@ with open(csvFile, newline='') as f:
             NBT = [date, time, "Trucks", "Thru", "NB", nbt, siteCode]
             NBL = [date, time, "Trucks", "Left", "NB", nbl, siteCode]
 
-            #SB Trucks Count
+            # SB Trucks Count
             sbr = row[6]
             sbt = row[5]
             sbl = row[4]
@@ -134,7 +120,7 @@ with open(csvFile, newline='') as f:
             SBT = [date, time, "Trucks", "Thru", "SB", sbt, siteCode]
             SBL = [date, time, "Trucks", "Left", "SB", sbl, siteCode]
 
-            #EB Trucks Count
+            # EB Trucks Count
             ebr = row[9]
             ebt = row[8]
             ebl = row[7]
@@ -142,14 +128,13 @@ with open(csvFile, newline='') as f:
             EBT = [date, time, "Trucks", "Thru", "EB", ebt, siteCode]
             EBL = [date, time, "Trucks", "Left", "EB", ebl, siteCode]
 
-            #WB Trucks Count
+            # WB Trucks Count
             wbr = row[12]
             wbt = row[11]
             wbl = row[10]
             WBR = [date, time, "Trucks", "Right", "WB", wbr, siteCode]
             WBT = [date, time, "Trucks", "Thru", "WB", wbt, siteCode]
             WBL = [date, time, "Trucks", "Left", "WB", wbl, siteCode]
-
 
             nb = [NBR, NBT, NBL]
             sb = [SBR, SBT, SBL]
@@ -165,14 +150,13 @@ with open(csvFile, newline='') as f:
             for element in wb:
                 final_list.append(element)
 
-    print('Heavy Vehicles')
-
     # Finds BICYCLE VOLUMES row 
     for idx, row in enumerate(csv_list):
         if row[0] == 'BICYCLE VOLUMES':
             BicycleStart = idx + 1
         if row[0] == 'SCOOTER VOLUMES':
             bicycleEnd = idx - 1
+
     # Grabs only Heavy Vehicle Volume data
     for idx, row in enumerate(csv_list) :
         if idx > BicycleStart and idx < bicycleEnd:
@@ -194,7 +178,7 @@ with open(csvFile, newline='') as f:
             SBT = [date, time, "Bicycles", "Thru", "SB", sbt, siteCode]
             SBL = [date, time, "Bicycles", "Left", "SB", sbl, siteCode]
 
-            #  EB Bikes Count
+            # EB Bikes Count
             ebr = row[9]
             ebt = row[8]
             ebl = row[7]
@@ -202,7 +186,7 @@ with open(csvFile, newline='') as f:
             EBT = [date, time, "Bicycles", "Thru", "EB", ebt, siteCode]
             EBL = [date, time, "Bicycles", "Left", "EB", ebl, siteCode]
 
-            # WB Count
+            # WB Bikes Count
             wbr = row[12]
             wbt = row[11]
             wbl = row[10]
@@ -225,14 +209,10 @@ with open(csvFile, newline='') as f:
             for element in wb:
                 final_list.append(element)
 
-    print('Bicycles')
-
+    # puts all data onto a final deliverable file
     with open(siteCode + '_test' + '.csv', 'w+', newline='') as f:
         writer = csv.writer(f)
         writer.writerows(final_list)
-
-
-
 
 # if __name__ == '__main__':
 #     main()
